@@ -15,21 +15,21 @@
  */
 package com.alibaba.csp.sentinel;
 
-import org.junit.Test;
-
+import com.alibaba.csp.sentinel.context.Context;
 import com.alibaba.csp.sentinel.context.ContextUtil;
 
 /**
- * @author jialiang.linjl
+ * @author Eric Zhao
  */
-public class ContextTest {
+public final class TestUtil {
 
-    @Test
-    public void testEnterContext() {
-        // TODO: rewrite this unit test
-        ContextUtil.enter("entry", "origin");
-
-        ContextUtil.exit();
+    public static void cleanUpContext() {
+        Context context = ContextUtil.getContext();
+        if (context != null) {
+            context.setCurEntry(null);
+            ContextUtil.exit();
+        }
     }
 
+    private TestUtil() {}
 }
